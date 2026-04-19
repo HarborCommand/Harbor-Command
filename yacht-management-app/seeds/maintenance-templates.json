@@ -1,0 +1,366 @@
+[
+  {
+    "id": "template-main-engine",
+    "name": "Main Engine (generic)",
+    "assetType": "main-engine",
+    "description": "Starter recurring service template for a main propulsion engine.",
+    "tasks": [
+      {
+        "id": "main-engine-oil-filters",
+        "title": "Change engine oil and primary filters",
+        "category": "Engines",
+        "description": "Replace engine oil and primary oil filters, then verify pressure after warmup.",
+        "defaultPriority": "High",
+        "intervalDays": 180,
+        "intervalHours": 250,
+        "reminderDays": 14,
+        "reminderHours": 25,
+        "recurrenceMode": "days-or-hours"
+      },
+      {
+        "id": "main-engine-fuel-filters",
+        "title": "Inspect and service fuel filter set",
+        "category": "Engines",
+        "description": "Inspect Racor bowls, replace secondaries if loaded, and log any contamination.",
+        "defaultPriority": "High",
+        "intervalDays": 90,
+        "intervalHours": 150,
+        "reminderDays": 10,
+        "reminderHours": 20,
+        "recurrenceMode": "days-or-hours"
+      },
+      {
+        "id": "main-engine-raw-water",
+        "title": "Inspect raw water impeller and cooling flow",
+        "category": "Engines",
+        "description": "Check impeller condition, pump housing, and discharge temperature/flow.",
+        "defaultPriority": "Medium",
+        "intervalDays": 120,
+        "intervalHours": 200,
+        "reminderDays": 7,
+        "reminderHours": 20,
+        "recurrenceMode": "days-or-hours"
+      },
+      {
+        "id": "main-engine-belts-mounts",
+        "title": "Inspect belts, hoses, and engine mounts",
+        "category": "Engines",
+        "description": "Inspect belt wear, hose condition, and mount fasteners for movement or vibration.",
+        "defaultPriority": "Medium",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-generator",
+    "name": "Generator (generic)",
+    "assetType": "generator",
+    "description": "Starter recurring service template for vessel generators.",
+    "tasks": [
+      {
+        "id": "generator-oil-service",
+        "title": "Change generator oil and filter",
+        "category": "Generator",
+        "description": "Perform generator oil service and record load hours at completion.",
+        "defaultPriority": "High",
+        "intervalDays": 180,
+        "intervalHours": 200,
+        "reminderDays": 10,
+        "reminderHours": 20,
+        "recurrenceMode": "days-or-hours"
+      },
+      {
+        "id": "generator-raw-water",
+        "title": "Inspect raw water impeller and exhaust discharge",
+        "category": "Generator",
+        "description": "Verify raw-water flow and inspect the wet exhaust path for heat or leaks.",
+        "defaultPriority": "High",
+        "intervalDays": 90,
+        "intervalHours": 150,
+        "reminderDays": 7,
+        "reminderHours": 15,
+        "recurrenceMode": "days-or-hours"
+      },
+      {
+        "id": "generator-belt-electrical",
+        "title": "Inspect drive belt and electrical terminations",
+        "category": "Generator",
+        "description": "Check tension, belt wear, battery charging, and terminal cleanliness.",
+        "defaultPriority": "Medium",
+        "intervalDays": 45,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-ac-chiller",
+    "name": "AC / Chiller System",
+    "assetType": "ac-chiller",
+    "description": "Recurring checks for chilled water and onboard HVAC systems.",
+    "tasks": [
+      {
+        "id": "ac-strainers",
+        "title": "Clean seawater strainers and verify pump operation",
+        "category": "AC / Chiller System",
+        "description": "Clean intake strainers, verify seawater pump flow, and confirm discharge temperature.",
+        "defaultPriority": "High",
+        "intervalDays": 14,
+        "intervalHours": 0,
+        "reminderDays": 2,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "ac-air-handlers",
+        "title": "Inspect air handlers and chilled-water flow",
+        "category": "AC / Chiller System",
+        "description": "Verify handler drains, blower response, and balanced chilled-water flow.",
+        "defaultPriority": "Medium",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "ac-refrigerant-check",
+        "title": "Check refrigerant pressures with technician",
+        "category": "AC / Chiller System",
+        "description": "Coordinate seasonal pressure and condenser efficiency check with qualified HVAC support.",
+        "defaultPriority": "Medium",
+        "intervalDays": 120,
+        "intervalHours": 0,
+        "reminderDays": 14,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-bilge-pump",
+    "name": "Bilge / Pump System",
+    "assetType": "bilge-pump",
+    "description": "Recurring bilge and pump integrity checks.",
+    "tasks": [
+      {
+        "id": "bilge-float-test",
+        "title": "Test bilge pumps and float switches",
+        "category": "Bilge / Pump System",
+        "description": "Cycle auto and manual pump modes and confirm float switch response.",
+        "defaultPriority": "High",
+        "intervalDays": 14,
+        "intervalHours": 0,
+        "reminderDays": 2,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "bilge-cleanliness",
+        "title": "Clean bilges and inspect for contamination",
+        "category": "Bilge / Pump System",
+        "description": "Check for oil sheen, debris, and stagnant water around pumps and limber holes.",
+        "defaultPriority": "Medium",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "bilge-hose-clamps",
+        "title": "Inspect discharge hoses and clamps",
+        "category": "Bilge / Pump System",
+        "description": "Inspect hose routing, check valves, and clamp integrity at each pump outlet.",
+        "defaultPriority": "Medium",
+        "intervalDays": 60,
+        "intervalHours": 0,
+        "reminderDays": 7,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-fresh-water",
+    "name": "Fresh Water System",
+    "assetType": "fresh-water",
+    "description": "Recurring potable water system service items.",
+    "tasks": [
+      {
+        "id": "fresh-water-pressure",
+        "title": "Check water pump pressure and inspect for leaks",
+        "category": "Fresh Water System",
+        "description": "Verify pressure stability at fixtures and inspect pump cycling behavior.",
+        "defaultPriority": "Medium",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "fresh-water-sanitize",
+        "title": "Sanitize fresh water tanks and lines",
+        "category": "Fresh Water System",
+        "description": "Flush and sanitize potable water tanks, manifolds, and outlet points.",
+        "defaultPriority": "High",
+        "intervalDays": 90,
+        "intervalHours": 0,
+        "reminderDays": 10,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "fresh-water-filters",
+        "title": "Inspect water filters and UV treatment",
+        "category": "Fresh Water System",
+        "description": "Replace inline filters as needed and confirm UV or treatment hardware is operating.",
+        "defaultPriority": "Medium",
+        "intervalDays": 60,
+        "intervalHours": 0,
+        "reminderDays": 7,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-heads-sanitation",
+    "name": "Heads / Sanitation System",
+    "assetType": "sanitation",
+    "description": "Recurring service items for marine heads, macerators, and sanitation piping.",
+    "tasks": [
+      {
+        "id": "sanitation-heads-test",
+        "title": "Cycle heads and verify discharge / flush operation",
+        "category": "Heads / Sanitation System",
+        "description": "Test each head for proper flush sequence, discharge, and venting.",
+        "defaultPriority": "High",
+        "intervalDays": 14,
+        "intervalHours": 0,
+        "reminderDays": 2,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "sanitation-hoses-clamps",
+        "title": "Inspect sanitation hoses, clamps, and vent filters",
+        "category": "Heads / Sanitation System",
+        "description": "Check for seepage, odor, clamp corrosion, and blocked vent components.",
+        "defaultPriority": "Medium",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "sanitation-treatment",
+        "title": "Service treatment / holding tank fittings",
+        "category": "Heads / Sanitation System",
+        "description": "Inspect tank fittings, macerator connections, Y-valves, and treatment dosing components.",
+        "defaultPriority": "Medium",
+        "intervalDays": 60,
+        "intervalHours": 0,
+        "reminderDays": 7,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-exterior-washdown",
+    "name": "Exterior Washdown / General Deck",
+    "assetType": "deck",
+    "description": "Recurring deck, exterior, and presentation maintenance.",
+    "tasks": [
+      {
+        "id": "deck-washdown",
+        "title": "Exterior washdown and stainless rinse",
+        "category": "Exterior Washdown / General Deck",
+        "description": "Wash salt from topsides, rails, hardware, and cockpit fittings.",
+        "defaultPriority": "Medium",
+        "intervalDays": 7,
+        "intervalHours": 0,
+        "reminderDays": 1,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "deck-scuppers-drains",
+        "title": "Inspect scuppers, deck drains, and anchor locker drains",
+        "category": "Exterior Washdown / General Deck",
+        "description": "Clear debris from drains and verify runoff paths are not backing up.",
+        "defaultPriority": "Medium",
+        "intervalDays": 14,
+        "intervalHours": 0,
+        "reminderDays": 2,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "deck-hardware-fasteners",
+        "title": "Inspect deck hardware, hatches, and fasteners",
+        "category": "Exterior Washdown / General Deck",
+        "description": "Check hatch dogs, deck cleats, rails, and visible fasteners for looseness or corrosion.",
+        "defaultPriority": "Low",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  },
+  {
+    "id": "template-safety-equipment",
+    "name": "Safety Equipment",
+    "assetType": "safety",
+    "description": "Recurring checks for emergency and compliance equipment.",
+    "tasks": [
+      {
+        "id": "safety-extinguishers",
+        "title": "Inspect fire extinguishers and pressure indicators",
+        "category": "Safety Equipment",
+        "description": "Inspect extinguisher seals, gauges, and mounting points in all stations.",
+        "defaultPriority": "High",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "safety-epirb-flares",
+        "title": "Check EPIRB, flares, and ditch-bag expiration dates",
+        "category": "Safety Equipment",
+        "description": "Verify emergency beacon readiness and inspect dated pyrotechnics and batteries.",
+        "defaultPriority": "High",
+        "intervalDays": 30,
+        "intervalHours": 0,
+        "reminderDays": 5,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      },
+      {
+        "id": "safety-pfds-liferaft",
+        "title": "Inspect PFDs, throwables, and liferaft service status",
+        "category": "Safety Equipment",
+        "description": "Confirm gear condition, count, accessibility, and scheduled raft service windows.",
+        "defaultPriority": "High",
+        "intervalDays": 60,
+        "intervalHours": 0,
+        "reminderDays": 10,
+        "reminderHours": 0,
+        "recurrenceMode": "days"
+      }
+    ]
+  }
+]

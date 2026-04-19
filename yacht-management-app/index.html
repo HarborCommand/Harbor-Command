@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harbor Command | Vessel Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="public/assets/harbor-command-logo.ico?v=20260417g" />
+    <link rel="apple-touch-icon" href="public/assets/harbor-command-logo.png?v=20260417g" />
+  <link rel="stylesheet" href="styles.css?v=20260418g" />
+  </head>
+  <body class="auth-locked">
+    <section class="boot-splash" id="boot-splash" aria-live="polite">
+      <div class="boot-splash-card panel">
+        <div class="auth-brand boot-splash-brand">
+          <span class="brand-logo-shell auth-brand-logo-shell boot-splash-logo-shell">
+            <img
+              class="brand-logo auth-brand-logo boot-splash-logo"
+              src="public/assets/harbor-command-logo.png?v=20260417g"
+              alt="Harbor Command logo"
+            />
+          </span>
+          <div class="brand-lockup auth-brand-lockup boot-splash-lockup">
+            <span class="brand-name">Harbor Command</span>
+            <span class="brand-subtitle">Vessel Operations</span>
+          </div>
+        </div>
+        <p class="eyebrow boot-splash-eyebrow">Preparing Your Command Center</p>
+        <h2 class="boot-splash-title">Loading Harbor Command</h2>
+        <p class="boot-splash-copy" id="boot-splash-copy">Syncing your vessel workspace.</p>
+        <div class="boot-splash-pulse" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-shell" id="auth-shell" aria-live="polite">
+        <div class="auth-card panel">
+          <div class="auth-brand">
+            <span class="brand-logo-shell auth-brand-logo-shell">
+              <img
+                class="brand-logo auth-brand-logo"
+                src="public/assets/harbor-command-logo.png?v=20260417g"
+                alt="Harbor Command logo"
+              />
+            </span>
+            <div class="brand-lockup auth-brand-lockup">
+              <span class="brand-name">Harbor Command</span>
+              <span class="brand-subtitle">Vessel Operations</span>
+            </div>
+          </div>
+        <p class="eyebrow" id="auth-eyebrow">Secure Access</p>
+        <h2 id="auth-title">Loading Harbor Command</h2>
+        <p class="auth-copy" id="auth-copy">Checking the vessel access session.</p>
+        <p class="auth-error" id="auth-error" hidden></p>
+        <div class="auth-service-help" id="auth-service-help" hidden>
+          <p class="auth-service-copy">
+            Harbor Command runs with a local secure service on your computer. If that service is offline, open the app from
+            <strong>http://127.0.0.1:8787/</strong> or launch it again from <strong>start-harbor-command.cmd</strong>.
+          </p>
+          <div class="auth-service-actions">
+              <a class="ghost-button" id="auth-open-local" href="http://127.0.0.1:8787/?launch=manual">Open local app</a>
+            <button class="text-button" id="auth-retry" type="button">Retry connection</button>
+          </div>
+        </div>
+        <form id="auth-form" class="stacked-form auth-form" novalidate>
+          <label id="auth-name-row" hidden>
+            Full name
+            <input id="auth-name-input" type="text" name="name" autocomplete="name" />
+          </label>
+          <label id="auth-email-row">
+            Email
+            <input id="auth-email-input" type="email" name="email" autocomplete="username" required />
+          </label>
+          <label id="auth-role-row" hidden>
+            Role
+            <select id="auth-role-select" name="role">
+              <option>Captain</option>
+              <option>Engineer</option>
+              <option>Management</option>
+              <option>Owner</option>
+              <option>Crew</option>
+            </select>
+          </label>
+          <label id="auth-password-row">
+            <span id="auth-password-label">Password</span>
+            <input id="auth-password-input" type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button class="primary-button" id="auth-submit" type="submit">Continue</button>
+        </form>
+        <button class="text-button auth-toggle" id="auth-toggle" type="button" hidden></button>
+      </div>
+    </section>
+
+    <section class="access-modal-shell" id="access-modal" hidden aria-live="polite">
+      <div class="access-modal-backdrop" id="access-modal-backdrop"></div>
+      <div class="access-modal panel">
+        <div class="section-heading access-modal-heading">
+          <div>
+            <p class="eyebrow">Access Control</p>
+            <h2>Manage access</h2>
+          </div>
+          <button class="text-button" id="close-access-modal" type="button">Close</button>
+        </div>
+        <div class="access-modal-grid">
+          <section class="access-card">
+            <div class="section-heading access-subheading">
+              <div>
+                <p class="eyebrow">Invite Flow</p>
+                <h3>Create invite link</h3>
+              </div>
+            </div>
+            <form id="invite-form" class="stacked-form invite-form">
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="off" required />
+              </label>
+              <label>
+                Role
+                <select name="role">
+                  <option>Captain</option>
+                  <option>Engineer</option>
+                  <option>Management</option>
+                  <option>Owner</option>
+                  <option selected>Crew</option>
+                </select>
+              </label>
+              <div class="access-vessel-field" id="invite-vessel-field">
+                <span>Vessel access</span>
+                <div class="access-vessel-picker" id="invite-vessel-picker"></div>
+                <p class="small-copy" id="invite-vessel-help"></p>
+              </div>
+              <div class="form-actions">
+                <button class="primary-button" id="invite-submit" type="submit">Create invite</button>
+              </div>
+            </form>
+            <p class="users-feedback" id="invite-feedback" hidden></p>
+            <div class="invite-preview" id="invite-preview"></div>
+            <div class="invite-list" id="invite-list"></div>
+          </section>
+
+          <section class="access-card">
+            <div class="section-heading access-subheading">
+              <div>
+                <p class="eyebrow">Current Accounts</p>
+                <h3>Existing users</h3>
+              </div>
+            </div>
+            <p class="users-feedback" id="users-feedback" hidden></p>
+            <div class="user-table-wrap" id="users-list"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <div class="app-shell">
+      <header class="hero panel">
+        <div class="hero-copy">
+          <p class="eyebrow">Harbor Command</p>
+          <h1>Run one vessel with total operational clarity.</h1>
+          <p class="hero-text">
+            Track service, crew, charter activity, voyage planning, and daily
+            updates for a single vessel from one focused command center.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-button" id="jump-to-vessel">Edit Vessel</button>
+            <a class="ghost-button" href="#workspace-nav">Browse Sections</a>
+            <button class="ghost-button" id="open-access-modal" type="button" hidden>Access</button>
+            <button class="ghost-button" id="logout-button" type="button" hidden>Logout</button>
+          </div>
+        </div>
+        <div class="hero-metrics" id="summary-cards"></div>
+      </header>
+
+      <main class="workspace">
+        <section class="content-area">
+          <section class="panel spotlight section-block" id="spotlight-panel"></section>
+
+          <nav class="panel workspace-nav" id="workspace-nav" aria-label="Workspace sections">
+            <div class="workspace-brand" aria-label="Harbor Command">
+              <span class="brand-logo-shell workspace-brand-logo-shell">
+                <img
+                  class="brand-logo workspace-brand-logo"
+                    src="public/assets/harbor-command-logo.png?v=20260417g"
+                  alt="Harbor Command logo"
+                />
+              </span>
+              <div class="brand-lockup workspace-brand-lockup">
+                <span class="brand-name">Harbor Command</span>
+                <span class="brand-subtitle">Vessel Operations</span>
+              </div>
+            </div>
+            <div class="workspace-tab-row">
+              <button class="workspace-tab active" type="button" data-view="overview">Overview</button>
+              <button class="workspace-tab" type="button" data-view="vessel">Vessel</button>
+              <button class="workspace-tab" type="button" data-view="maintenance">Maintenance</button>
+              <button class="workspace-tab" type="button" data-view="work-orders">Work Orders</button>
+              <!-- Charters tab temporarily disabled (Phase 1 UX cleanup) -->
+              <button class="workspace-tab" type="button" data-view="crew">Crew</button>
+              <button class="workspace-tab" type="button" data-view="reports">Reports</button>
+              <button class="workspace-tab" type="button" data-view="vendors">Vendors</button>
+              <button class="workspace-tab" type="button" data-view="inventory">Inventory</button>
+              <button class="workspace-tab" type="button" data-view="expenses">Expenses</button>
+              <button class="workspace-tab" type="button" data-view="voyage">Voyage</button>
+            </div>
+          </nav>
+
+          <div class="view-stack">
+            <section class="panel section-block view-panel active" id="overview-panel" data-view-panel="overview"></section>
+
+            <section class="panel section-block view-panel vessel-section" data-view-panel="vessel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Fleet Profile</p>
+                  <h2>Vessel profile</h2>
+                </div>
+              </div>
+              <div class="vessel-layout">
+                <div class="vessel-systems-grid" id="vessel-dashboard"></div>
+                <div class="vessel-forms-grid">
+                  <section class="vessel-form-card" id="vessel-form-section">
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">Vessel Composer</p>
+                        <h2>Create or edit vessel profile</h2>
+                        <p class="small-copy">Search the catalog, create a custom yacht if needed, and keep the full vessel profile in one place.</p>
+                      </div>
+                    </div>
+                    <div id="vessel-add-section" class="stacked-form vessel-add-shell">
+                      <label>
+                        Vessel display name
+                        <input type="text" form="vessel-add-form" name="customName" placeholder="Optional. Defaults to the selected model name." />
+                      </label>
+                      <form id="vessel-add-form" class="stacked-form" novalidate>
+                        <div class="form-row form-row-three">
+                          <label>
+                            Year
+                            <select name="catalogYear">
+                              <option value="">Select year</option>
+                            </select>
+                          </label>
+                          <label>
+                            Brand / manufacturer
+                            <select name="catalogManufacturerId">
+                              <option value="">Select brand</option>
+                            </select>
+                          </label>
+                          <label>
+                            Model
+                            <select name="catalogModelId">
+                              <option value="">Select model</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div class="form-row">
+                          <label>
+                            Custom brand / manufacturer
+                            <input type="text" name="customManufacturer" placeholder="Use this only if the builder is not in the list." />
+                          </label>
+                          <label>
+                            Custom model
+                            <input type="text" name="customModel" placeholder="Use this only if the model is not in the list." />
+                          </label>
+                        </div>
+                        <p class="small-copy">Pick from the Harbor Command catalog, or use the custom fields when the vessel is not listed. You can change selections at any time before creating the vessel.</p>
+                        <div class="vessel-catalog-preview" id="vessel-catalog-preview">
+                          <div class="empty-state compact-empty-state">Select a catalog vessel to preview specs here, or create a custom vessel instead.</div>
+                        </div>
+                        <div class="photo-upload-row">
+                          <label class="photo-upload-field">
+                            Vessel image
+                            <input id="vessel-add-photo-input" type="file" accept="image/*" />
+                          </label>
+                          <button class="text-button" id="clear-vessel-add-photo" type="button" hidden>Remove image</button>
+                        </div>
+                        <p class="small-copy upload-copy">Upload the yacht image here so the new vessel profile is created with its own saved photo from the start.</p>
+                        <p class="system-note" id="vessel-add-feedback" hidden></p>
+                        <div class="form-actions">
+                          <button class="primary-button" type="submit">Create vessel and open profile</button>
+                          <button class="ghost-button" id="create-custom-vessel" type="button">Create custom vessel</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="section-divider"></div>
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">Profile Editor</p>
+                        <h2>Edit active vessel profile</h2>
+                        <p class="small-copy">Builder, dimensions, captain, berth, and the standing notes that define this yacht at a glance.</p>
+                      </div>
+                    </div>
+                    <form id="vessel-form" class="stacked-form" novalidate>
+                      <label>
+                        Vessel name
+                        <input type="text" name="name" placeholder="LTD" required />
+                      </label>
+                      <label>
+                        Builder
+                        <input type="text" name="builder" placeholder="Lazzara" />
+                      </label>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Model
+                          <input type="text" name="model" placeholder="Sanlorenzo SX88" required />
+                        </label>
+                        <label>
+                          Year built
+                          <input type="number" name="yearBuilt" min="1900" max="2100" step="1" />
+                        </label>
+                        <label>
+                          Vessel type
+                          <input type="text" name="vesselType" placeholder="Motor Yacht" />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Captain
+                          <input type="text" name="captain" placeholder="Elena Rossi" required />
+                        </label>
+                        <label>
+                          Current location
+                          <input type="text" name="location" placeholder="Nassau" required />
+                        </label>
+                        <label>
+                          Hull material
+                          <input type="text" name="hullMaterial" placeholder="GRP / Fiberglass" />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Length
+                          <input type="number" name="length" min="20" max="300" value="88" required />
+                        </label>
+                        <label>
+                          Beam
+                          <input type="number" name="beam" min="5" max="60" step="0.1" value="23" />
+                        </label>
+                        <label>
+                          Draft
+                          <input type="number" name="draft" min="1" max="20" step="0.1" value="5.8" />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Guests
+                          <input type="number" name="guests" min="2" max="24" value="12" required />
+                        </label>
+                        <label>
+                          Status
+                          <select name="status">
+                            <option>Ready</option>
+                            <option>Charter</option>
+                            <option>Docked</option>
+                            <option>Refit</option>
+                          </select>
+                        </label>
+                        <label>
+                          Berth
+                          <input type="text" name="berth" placeholder="Nassau Marina B2" required />
+                        </label>
+                      </div>
+                      <label>
+                        Command notes
+                        <textarea
+                          name="notes"
+                          rows="5"
+                          placeholder="Operational notes, owner preferences, handover details, or any standing instructions."
+                          required
+                        ></textarea>
+                      </label>
+                      <div class="photo-upload-row">
+                        <label class="photo-upload-field">
+                          Vessel photo
+                          <input id="vessel-photo-input" type="file" accept="image/*" />
+                        </label>
+                        <button class="text-button" id="clear-vessel-photo" type="button" hidden>Remove photo</button>
+                      </div>
+                      <p class="small-copy upload-copy">Upload a vessel image to show it below the overview gauges.</p>
+                      <button class="primary-button" type="submit">Save vessel</button>
+                    </form>
+                  </section>
+
+                  <section class="vessel-form-card" id="vessel-systems-section">
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">Systems Watch</p>
+                        <h2>Levels, capacity, and machinery</h2>
+                        <p class="small-copy">Keep the live operational picture current so the Vessel tab reads like a true command profile.</p>
+                      </div>
+                    </div>
+                    <form id="vessel-systems-form" class="stacked-form vessel-systems-form" novalidate>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Fuel level
+                          <input type="number" name="fuel" min="0" max="100" required />
+                        </label>
+                        <label>
+                          Water tank
+                          <input type="number" name="waterTank" min="0" max="100" required />
+                        </label>
+                        <label>
+                          Grey tank
+                          <input type="number" name="greyTank" min="0" max="100" required />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Black water tank
+                          <input type="number" name="blackTankLevel" min="0" max="100" required />
+                        </label>
+                        <label>
+                          Battery status
+                          <input type="number" name="batteryStatus" min="0" max="100" required />
+                        </label>
+                        <label>
+                          Utilization
+                          <input type="number" name="utilization" min="0" max="100" required />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Fuel capacity
+                          <input type="number" name="fuelCapacity" min="0" step="1" />
+                        </label>
+                        <label>
+                          Water capacity
+                          <input type="number" name="waterCapacity" min="0" step="1" />
+                        </label>
+                        <label>
+                          Grey water capacity
+                          <input type="number" name="greyWaterCapacity" min="0" step="1" />
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Black water capacity
+                          <input type="number" name="blackWaterCapacity" min="0" step="1" />
+                        </label>
+                        <label>
+                          Next service date
+                          <input type="date" name="nextService" required />
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Engine summary
+                          <input type="text" name="engineInfo" placeholder="Twin MAN V12 1550" />
+                        </label>
+                        <label>
+                          Generator summary
+                          <input type="text" name="generatorInfo" placeholder="Twin 28 kW generators" />
+                        </label>
+                      </div>
+                      <p class="small-copy">Detailed engine and generator records now live in the dedicated machinery sections below.</p>
+                      <div class="form-actions">
+                        <button class="primary-button" type="submit">Save systems</button>
+                      </div>
+                    </form>
+                  </section>
+
+                  <section class="vessel-form-card" id="vessel-engine-section">
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">Main Machinery</p>
+                        <h2>Engines</h2>
+                        <p class="small-copy">Track each main engine with hours, interval, and service timing.</p>
+                      </div>
+                    </div>
+                    <div class="stacked-list machinery-list" id="engine-list"></div>
+                    <form id="engine-form" class="stacked-form vessel-machinery-form" novalidate>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Label
+                          <input type="text" name="label" placeholder="Port Main" required />
+                        </label>
+                        <label>
+                          Manufacturer
+                          <input type="text" name="manufacturer" list="engine-manufacturer-options" placeholder="MAN" autocomplete="off" />
+                        </label>
+                        <label>
+                          Model
+                          <input type="text" name="model" placeholder="V12 1550" />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Rating
+                          <input type="text" name="rating" placeholder="1550 HP" />
+                        </label>
+                        <label>
+                          Hours
+                          <input type="number" name="hours" min="0" step="1" value="0" />
+                        </label>
+                        <label>
+                          Last service hrs
+                          <input type="number" name="lastServiceHours" min="0" step="1" value="0" />
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Service interval
+                          <input type="number" name="serviceIntervalHours" min="0" step="1" value="0" />
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Last service
+                          <input type="date" name="lastServiceDate" />
+                        </label>
+                        <label>
+                          Next service
+                          <input type="date" name="nextServiceDate" />
+                        </label>
+                      </div>
+                      <label>
+                        Notes
+                        <textarea name="notes" rows="3" placeholder="Service notes, vibration checks, consumables, or follow-ups."></textarea>
+                      </label>
+                      <div class="form-actions">
+                        <button class="primary-button" id="engine-submit" type="submit">Add engine</button>
+                        <button class="ghost-button" id="engine-cancel" type="button" hidden>Cancel edit</button>
+                      </div>
+                    </form>
+                    <datalist id="engine-manufacturer-options"></datalist>
+                  </section>
+
+                  <section class="vessel-form-card" id="vessel-generator-section">
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">Power Plant</p>
+                        <h2>Generators</h2>
+                        <p class="small-copy">Track generator output, running hours, and upcoming service windows.</p>
+                      </div>
+                    </div>
+                    <div class="stacked-list machinery-list" id="generator-list"></div>
+                    <form id="generator-form" class="stacked-form vessel-machinery-form" novalidate>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Label
+                          <input type="text" name="label" placeholder="Port Generator" required />
+                        </label>
+                        <label>
+                          Manufacturer
+                          <input type="text" name="manufacturer" list="generator-manufacturer-options" placeholder="Kohler" autocomplete="off" />
+                        </label>
+                        <label>
+                          Model
+                          <input type="text" name="model" placeholder="28kW" />
+                        </label>
+                      </div>
+                      <div class="form-row form-row-three">
+                        <label>
+                          Rating
+                          <input type="text" name="rating" placeholder="28 kW" />
+                        </label>
+                        <label>
+                          Hours
+                          <input type="number" name="hours" min="0" step="1" value="0" />
+                        </label>
+                        <label>
+                          Last service hrs
+                          <input type="number" name="lastServiceHours" min="0" step="1" value="0" />
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Service interval
+                          <input type="number" name="serviceIntervalHours" min="0" step="1" value="0" />
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Last service
+                          <input type="date" name="lastServiceDate" />
+                        </label>
+                        <label>
+                          Next service
+                          <input type="date" name="nextServiceDate" />
+                        </label>
+                      </div>
+                      <label>
+                        Notes
+                        <textarea name="notes" rows="3" placeholder="Load behavior, service notes, and watch items."></textarea>
+                      </label>
+                      <div class="form-actions">
+                        <button class="primary-button" id="generator-submit" type="submit">Add generator</button>
+                        <button class="ghost-button" id="generator-cancel" type="button" hidden>Cancel edit</button>
+                      </div>
+                    </form>
+                    <datalist id="generator-manufacturer-options"></datalist>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel section-block view-panel maintenance-section" data-view-panel="maintenance">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Engineering Deck</p>
+                  <h2>Maintenance command center</h2>
+                </div>
+              </div>
+              <div class="maintenance-workspace-shell">
+                <div class="maintenance-workspace-nav">
+                  <div class="maintenance-subnav" id="maintenance-subnav" role="tablist" aria-label="Maintenance sections">
+                    <button class="maintenance-subtab active" type="button" data-maintenance-view="overview">Overview</button>
+                    <button class="maintenance-subtab" type="button" data-maintenance-view="tasks">Tasks</button>
+                    <button class="maintenance-subtab" type="button" data-maintenance-view="systems">Systems</button>
+                    <button class="maintenance-subtab" type="button" data-maintenance-view="new-service-task">New Service Task</button>
+                    <button class="maintenance-subtab" type="button" data-maintenance-view="history">History</button>
+                  </div>
+                  <div class="maintenance-quick-actions" id="maintenance-quick-actions">
+                    <button class="ghost-button" id="jump-to-maintenance-asset-form" type="button">+ Add equipment</button>
+                    <button class="primary-button" id="jump-to-maintenance-form" type="button">+ Add maintenance task</button>
+                    <button class="ghost-button" id="maintenance-apply-starter-pack" type="button">Apply Starter Pack</button>
+                  </div>
+                </div>
+                <section class="maintenance-workspace-panel active" data-maintenance-panel="overview">
+                  <div class="maintenance-health-bar" id="maintenance-focus"></div>
+                  <article class="maintenance-surface maintenance-overview-spotlight" id="maintenance-overview-spotlight"></article>
+                </section>
+
+                <section class="maintenance-workspace-panel" data-maintenance-panel="tasks">
+                  <div class="maintenance-toolbar">
+                    <div class="maintenance-filters" id="maintenance-filters"></div>
+                    <label class="sort-shell">
+                      <span>Sort by</span>
+                      <select id="maintenance-sort">
+                        <option value="category">System grouping</option>
+                        <option value="due-date-asc">Due date</option>
+                        <option value="due-date-desc">Latest due date</option>
+                        <option value="priority">Priority</option>
+                        <option value="task-asc">Task name</option>
+                      </select>
+                    </label>
+                    <label class="maintenance-search-shell">
+                      <span class="maintenance-search-label">Search</span>
+                      <input
+                        type="search"
+                        id="maintenance-search"
+                        placeholder="Search task, system, note, or interval"
+                        autocomplete="off"
+                      />
+                    </label>
+                  </div>
+                  <div class="maintenance-section-browser">
+                    <div class="maintenance-surface-heading">
+                      <div>
+                        <p class="eyebrow">System navigation</p>
+                        <h3>Switch between systems</h3>
+                      </div>
+                      <p class="small-copy">Use All systems for a vessel-wide view, or jump into one installed system for a focused service board.</p>
+                    </div>
+                    <div class="maintenance-sections-rail" id="maintenance-sections"></div>
+                    <div class="maintenance-section-summary" id="maintenance-section-summary"></div>
+                  </div>
+                  <div class="maintenance-board-wrap">
+                    <div class="maintenance-list" id="maintenance-list"></div>
+                  </div>
+                </section>
+
+                <section class="maintenance-workspace-panel" data-maintenance-panel="systems">
+                  <div class="maintenance-engine-grid">
+                    <article class="maintenance-surface maintenance-assets-shell">
+                      <div class="maintenance-surface-heading">
+                        <div>
+                          <p class="eyebrow">Installed systems</p>
+                          <h3>Equipment on this vessel</h3>
+                        </div>
+                        <p class="small-copy">Install engines, generators, pumps, and deck systems once, then let Harbor Command run recurring service from those assets.</p>
+                      </div>
+                      <div class="maintenance-assets-list" id="maintenance-assets-list"></div>
+                    </article>
+
+                    <article class="maintenance-surface maintenance-builder-shell">
+                      <div class="maintenance-surface-heading">
+                        <div>
+                          <p class="eyebrow">Asset builder</p>
+                          <h3>Install equipment from a template</h3>
+                        </div>
+                        <p class="small-copy">Use the starter template catalog for smart recurring tasks, or install a custom system and add your own service schedule.</p>
+                      </div>
+                      <form id="maintenance-asset-form" class="stacked-form maintenance-form maintenance-asset-form" novalidate>
+                        <div class="form-row">
+                          <label>
+                            Template
+                            <select name="templateId">
+                              <option value="">Custom / no template</option>
+                            </select>
+                          </label>
+                          <label>
+                            Installed equipment name
+                            <input type="text" name="name" placeholder="Port Main Engine" />
+                          </label>
+                        </div>
+                        <div class="form-row form-row-three">
+                          <label>
+                            Asset type
+                            <input type="text" name="assetType" placeholder="main-engine, generator, fresh-water" />
+                          </label>
+                          <label>
+                            Manufacturer
+                            <input type="text" name="manufacturer" placeholder="MAN, Kohler, Dometic" />
+                          </label>
+                          <label>
+                            Model
+                            <input type="text" name="model" placeholder="V12 1550, 28kW, Chiller 72" />
+                          </label>
+                        </div>
+                        <div class="form-row form-row-three">
+                          <label>
+                            Serial number
+                            <input type="text" name="serialNumber" placeholder="Optional" />
+                          </label>
+                          <label>
+                            Location
+                            <input type="text" name="location" placeholder="Engine room, lazarette, forepeak" />
+                          </label>
+                          <label>
+                            Current hours
+                            <input type="number" name="currentHours" min="0" step="1" value="0" />
+                          </label>
+                        </div>
+                        <div class="form-row">
+                          <label>
+                            Meter source
+                            <select name="meterSourceType">
+                              <option value="none">No linked hour source</option>
+                              <option value="manual">Manual hours</option>
+                              <option value="engine">Linked engine hours</option>
+                              <option value="generator">Linked generator hours</option>
+                            </select>
+                          </label>
+                          <label>
+                            Meter link
+                            <select name="meterSourceId">
+                              <option value="">No linked meter</option>
+                            </select>
+                            <span class="field-helper">Link the installed asset to a live engine or generator hour meter when available.</span>
+                          </label>
+                        </div>
+                        <label>
+                          Notes
+                          <textarea name="notes" rows="3" placeholder="Install notes, service references, or vessel-specific context."></textarea>
+                        </label>
+                        <div class="form-actions">
+                          <button class="primary-button" id="maintenance-asset-submit" type="submit">Install asset</button>
+                          <button class="ghost-button" id="maintenance-asset-cancel" type="button" hidden>Cancel edit</button>
+                        </div>
+                      </form>
+                      <div class="maintenance-template-preview" id="maintenance-asset-template-preview"></div>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="maintenance-workspace-panel" data-maintenance-panel="new-service-task">
+                  <form id="maintenance-form" class="stacked-form maintenance-form" novalidate>
+                    <div class="maintenance-surface-heading">
+                      <div>
+                        <p class="eyebrow">Task editor</p>
+                        <h3>Recurring service task</h3>
+                      </div>
+                      <p class="small-copy">Create one-off service tasks or fine-tune the recurring schedule generated from an installed asset.</p>
+                    </div>
+                  <div class="maintenance-editor-section">
+                    <div class="maintenance-editor-section-heading">
+                      <p class="eyebrow">Task info</p>
+                      <h4>What are we servicing?</h4>
+                    </div>
+                    <div class="form-row">
+                      <label>
+                        Task title
+                        <input type="text" name="title" placeholder="Inspect raw water impeller / exhaust system" />
+                      </label>
+                      <label>
+                        System / category
+                        <input type="text" name="category" placeholder="Generator" />
+                      </label>
+                    </div>
+                    <div class="form-row form-row-three">
+                      <label>
+                        Installed asset
+                        <select name="assetId">
+                          <option value="">Standalone vessel task</option>
+                        </select>
+                      </label>
+                      <label>
+                        Status
+                        <select name="status">
+                          <option>Not Started</option>
+                          <option>In Progress</option>
+                          <option>Completed</option>
+                        </select>
+                      </label>
+                      <label>
+                        Notes
+                        <textarea name="notes" rows="2" placeholder="Inspection notes, interval details, or technician instructions"></textarea>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="maintenance-editor-section">
+                    <div class="maintenance-editor-section-heading">
+                      <p class="eyebrow">Recurrence</p>
+                      <h4>Set the service cadence</h4>
+                    </div>
+                    <div class="maintenance-form-hint">
+                      Harbor Command will track and remind you automatically. Use days, hours, or both depending on how the equipment is serviced.
+                    </div>
+                    <div class="form-row form-row-three">
+                      <label>
+                        Recurrence mode
+                        <select name="recurrenceMode">
+                          <option value="days">Date-based</option>
+                          <option value="hours">Hour-based</option>
+                          <option value="days-or-hours">Days or hours</option>
+                        </select>
+                      </label>
+                      <label>
+                        Service interval (days)
+                        <input type="number" name="intervalDays" min="0" step="1" />
+                      </label>
+                      <label>
+                        Service interval (hours)
+                        <input type="number" name="intervalHours" min="0" step="1" />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="maintenance-editor-section">
+                    <div class="maintenance-editor-section-heading">
+                      <p class="eyebrow">Current cycle</p>
+                      <h4>Track this service window</h4>
+                    </div>
+                    <div class="form-row form-row-four">
+                      <label>
+                        Next due date
+                        <input type="date" name="dueDate" />
+                      </label>
+                      <label>
+                        Next due hours
+                        <input type="number" name="dueHours" min="0" step="1" value="0" />
+                      </label>
+                      <label>
+                        Last completed date
+                        <input type="date" name="lastCompleted" />
+                      </label>
+                      <label>
+                        Last completed hours
+                        <input type="number" name="lastCompletedHours" min="0" step="1" value="0" />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="maintenance-editor-section">
+                    <div class="maintenance-editor-section-heading">
+                      <p class="eyebrow">Reminders</p>
+                      <h4>When should Harbor Command alert the crew?</h4>
+                    </div>
+                    <div class="form-row">
+                      <label>
+                        Reminder lead time (days)
+                        <input type="number" name="reminderDays" min="0" step="1" />
+                      </label>
+                      <label>
+                        Reminder lead time (hours)
+                        <input type="number" name="reminderHours" min="0" step="1" />
+                      </label>
+                    </div>
+                  </div>
+                  <details class="maintenance-editor-advanced" id="maintenance-advanced">
+                    <summary>Advanced settings</summary>
+                    <div class="maintenance-editor-section maintenance-editor-section-compact">
+                      <div class="form-row">
+                        <label>
+                          Meter source
+                          <select name="meterSourceType">
+                            <option value="none">No linked hour source</option>
+                            <option value="manual">Manual hours</option>
+                            <option value="engine">Linked engine hours</option>
+                            <option value="generator">Linked generator hours</option>
+                          </select>
+                        </label>
+                        <label>
+                          Meter link
+                          <select name="meterSourceId">
+                            <option value="">No linked meter</option>
+                          </select>
+                          <span class="field-helper">Use a live engine or generator meter when this task should close on hours instead of dates.</span>
+                        </label>
+                      </div>
+                      <div class="form-row">
+                        <label>
+                          Priority
+                          <select name="priority">
+                            <option>High</option>
+                            <option>Medium</option>
+                            <option>Low</option>
+                            <option>Critical</option>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+                  </details>
+                  <div class="form-actions">
+                    <button class="primary-button" id="maintenance-submit" type="submit">Add task</button>
+                    <button class="text-button maintenance-cancel" id="maintenance-cancel" type="button" hidden>Cancel edit</button>
+                  </div>
+                  </form>
+                </section>
+
+                <section class="maintenance-workspace-panel" data-maintenance-panel="history">
+                  <article class="maintenance-surface maintenance-history-shell">
+                    <div class="maintenance-surface-heading">
+                      <div>
+                        <p class="eyebrow">Completion history</p>
+                        <h3>Recent service log</h3>
+                      </div>
+                      <p class="small-copy">Recent service is shown in plain language so captains, crew, and owners can see what was handled without digging into raw logs.</p>
+                    </div>
+                    <div class="maintenance-history-list" id="maintenance-history-list"></div>
+                  </article>
+                </section>
+              </div>
+            </section>
+
+            <section class="panel section-block view-panel weekly-report-section" data-view-panel="work-orders">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Operations Desk</p>
+                  <h2>Weekly workspace</h2>
+                </div>
+                <div class="report-heading-actions">
+                  <span class="log-period" id="work-order-period"></span>
+                  <button class="text-button" id="work-order-open-reports" type="button">Open reports</button>
+                  <button class="primary-button" id="work-order-generate-report" type="button">Generate report</button>
+                  <p class="report-action-note" id="work-order-action-note"></p>
+                </div>
+              </div>
+              <div class="report-layout report-layout-upgraded">
+                <article class="report-overview-card">
+                  <div class="report-overview-topline">
+                    <div>
+                      <p class="eyebrow">Current work week</p>
+                      <h3 id="work-order-title">Weekly workspace</h3>
+                    </div>
+                    <button class="ghost-button" id="jump-to-work-order-form" type="button">New entry</button>
+                  </div>
+                  <p class="small-copy" id="work-order-list-copy"></p>
+                  <div class="report-summary-grid" id="work-order-summary-cards"></div>
+                </article>
+                <div class="report-list-shell">
+                  <div class="report-list-heading">
+                    <div>
+                      <p class="eyebrow">Weekly entries</p>
+                      <h3>Monday through Friday workspace</h3>
+                    </div>
+                    <label class="sort-shell">
+                      <span>Sort by</span>
+                      <select id="work-order-sort">
+                        <option value="date-asc">Date</option>
+                        <option value="date-desc">Latest date</option>
+                        <option value="task-asc">Task name A-Z</option>
+                        <option value="task-desc">Task name Z-A</option>
+                        <option value="status">Status</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="report-list" id="work-order-list"></div>
+                </div>
+                <form id="work-order-form" class="stacked-form report-form report-form-upgraded" novalidate>
+                  <div class="report-form-topline">
+                    <div>
+                      <p class="eyebrow">Entry composer</p>
+                      <h3>Log the week’s work</h3>
+                    </div>
+                    <span class="small-copy" id="work-order-form-context"></span>
+                  </div>
+                  <label>
+                    Area / task
+                    <input type="text" name="item" placeholder="Laundry" />
+                  </label>
+                  <label>
+                    Date
+                    <input type="date" name="reportDate" />
+                  </label>
+                  <label>
+                    Linked maintenance
+                    <select name="maintenanceLogId">
+                      <option value="">No linked maintenance task</option>
+                    </select>
+                    <span class="field-helper">Optional. Link this weekly item to a recurring maintenance task so completion can update service dates automatically.</span>
+                  </label>
+                  <label>
+                    Work done
+                    <textarea
+                      name="workDone"
+                      rows="4"
+                      placeholder="What was completed today?"
+                    ></textarea>
+                  </label>
+                  <label>
+                    Systems checked
+                    <textarea
+                      name="systemsChecked"
+                      rows="3"
+                      placeholder="Systems or areas inspected"
+                    ></textarea>
+                  </label>
+                  <label>
+                    Issues
+                    <textarea
+                      name="issues"
+                      rows="3"
+                      placeholder="Problems, follow-up items, or outstanding issues"
+                    ></textarea>
+                  </label>
+                  <label>
+                    Notes
+                    <textarea
+                      name="notes"
+                      rows="3"
+                      placeholder="Extra context, handoff notes, or follow-up reminders"
+                    ></textarea>
+                  </label>
+                  <div class="form-actions">
+                    <button class="primary-button" id="work-order-submit" type="submit">Add entry</button>
+                    <button class="text-button" id="work-order-cancel" type="button" hidden>Cancel edit</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <section class="panel section-block view-panel" data-view-panel="charters">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Guest Services</p>
+                  <h2>Charter planner</h2>
+                </div>
+                <label class="sort-shell">
+                  <span>Sort by</span>
+                  <select id="charter-sort">
+                    <option value="start-asc">Start date</option>
+                    <option value="start-desc">Latest start</option>
+                    <option value="client-asc">Client name</option>
+                    <option value="status">Status</option>
+                  </select>
+                </label>
+              </div>
+              <div class="charter-list" id="charter-list"></div>
+              <form id="charter-form" class="stacked-form compact-form" novalidate>
+                <label>
+                  Client
+                  <input type="text" name="client" placeholder="Bluewater Advisory" required />
+                </label>
+                <div class="form-row">
+                  <label>
+                    Start
+                    <input type="date" name="start" required />
+                  </label>
+                  <label>
+                    End
+                    <input type="date" name="end" required />
+                  </label>
+                </div>
+                <label>
+                  Destination berth
+                  <input type="text" name="berth" placeholder="Marsh Harbour" required />
+                </label>
+                <button class="primary-button" type="submit">Create booking</button>
+              </form>
+            </section>
+
+            <section class="panel section-block view-panel" data-view-panel="crew">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Crew Deck</p>
+                  <h2>Crew list</h2>
+                </div>
+              </div>
+              <div class="crew-list" id="crew-list"></div>
+            </section>
+
+            <section class="panel section-block view-panel weekly-report-section" data-view-panel="reports">
+              <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Report History</p>
+                  <h2>Report library</h2>
+                </div>
+                <div class="report-heading-actions">
+                  <label class="report-history-picker">
+                    <span>Report history</span>
+                    <select id="report-history-select"></select>
+                  </label>
+                  <button class="text-button" id="report-view-button" type="button">View report</button>
+                  <button class="text-button" id="report-export-pdf" type="button">Download PDF</button>
+                  <button class="primary-button" id="report-toggle-status" type="button">Finalize report</button>
+                  <p class="report-action-note" id="report-action-note"></p>
+                </div>
+              </div>
+              <div class="report-layout report-layout-upgraded">
+                <article class="report-overview-card">
+                  <div class="report-overview-topline">
+                    <div>
+                      <p class="eyebrow">Current workspace</p>
+                      <h3 id="report-title">Weekly log</h3>
+                    </div>
+                    <div class="report-period-shell">
+                      <span class="status-badge" id="report-status-badge">Draft</span>
+                      <span class="log-period" id="report-period"></span>
+                    </div>
+                  </div>
+                  <div class="report-summary-grid" id="report-summary-cards"></div>
+                </article>
+                <div class="report-list-shell" id="report-preview-section">
+                  <div class="report-list-heading">
+                    <div>
+                      <p class="eyebrow">Report preview</p>
+                      <h3>Saved report entries</h3>
+                    </div>
+                    <p class="small-copy" id="report-preview-copy"></p>
+                  </div>
+                  <div class="report-list" id="report-preview-list"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel section-block view-panel vendors-section" data-view-panel="vendors">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Service Directory</p>
+                  <h2>Vendors</h2>
+                </div>
+                <button class="primary-button" id="jump-to-vendor-form" type="button">New vendor</button>
+              </div>
+              <div class="vendor-layout">
+                <form id="vendor-form" class="stacked-form vendor-form" novalidate>
+                  <label>
+                    Vendor name
+                    <input type="text" name="name" required />
+                  </label>
+                  <label>
+                    Contact person
+                    <input type="text" name="contact" required />
+                  </label>
+                  <label>
+                    Email
+                    <input type="email" name="email" />
+                  </label>
+                  <label>
+                    Phone
+                    <input type="text" name="phone" required />
+                  </label>
+                  <div class="form-row">
+                    <label>
+                      Status
+                      <select name="status">
+                        <option>Active</option>
+                        <option>Under review</option>
+                      </select>
+                    </label>
+                    <label>
+                      Category
+                      <input type="text" name="category" required />
+                    </label>
+                  </div>
+                  <div class="form-actions">
+                    <button class="primary-button" id="vendor-submit" type="submit">Add vendor</button>
+                    <button class="text-button vendor-cancel" id="vendor-cancel" type="button" hidden>Cancel edit</button>
+                  </div>
+                </form>
+                <div class="vendor-toolbar">
+                  <div class="vendor-filters" id="vendor-filters"></div>
+                  <label class="sort-shell">
+                    <span>Sort by</span>
+                    <select id="vendor-sort">
+                      <option value="name-asc">Name A-Z</option>
+                      <option value="name-desc">Name Z-A</option>
+                      <option value="category">Category</option>
+                      <option value="status">Status</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="vendor-table-wrap" id="vendor-table"></div>
+              </div>
+            </section>
+
+            <section class="panel section-block view-panel inventory-section" data-view-panel="inventory">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Stores Locker</p>
+                  <h2>Inventory</h2>
+                </div>
+                <div class="section-heading-actions">
+                  <label class="sort-shell">
+                    <span>Sort by</span>
+                    <select id="inventory-sort">
+                      <option value="name-asc">Name A-Z</option>
+                      <option value="name-desc">Name Z-A</option>
+                      <option value="quantity-low">Lowest quantity</option>
+                      <option value="quantity-high">Highest quantity</option>
+                      <option value="location">Location</option>
+                    </select>
+                  </label>
+                  <button class="primary-button" id="jump-to-inventory-form" type="button">New item</button>
+                </div>
+              </div>
+              <div class="inventory-list" id="inventory-list"></div>
+              <form id="inventory-form" class="stacked-form compact-form" novalidate>
+                <label>
+                  Item name
+                  <input type="text" name="name" placeholder="Engine oil 15W-40" required />
+                </label>
+                <div class="form-row">
+                  <label>
+                    Quantity
+                    <input type="number" name="quantity" min="0" step="0.1" value="1" required />
+                  </label>
+                  <label>
+                    Unit
+                    <input type="text" name="unit" placeholder="qt, gal, pcs" />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    Minimum quantity
+                    <input type="number" name="minimumQuantity" min="0" step="0.1" value="0" />
+                  </label>
+                  <label>
+                    Status
+                    <select name="status">
+                      <option>In Stock</option>
+                      <option>Low Stock</option>
+                      <option>Ordered</option>
+                      <option>Out of Stock</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  Location
+                  <input type="text" name="location" placeholder="Engine room locker" />
+                </label>
+                <label>
+                  Notes
+                  <textarea name="notes" rows="3" placeholder="Use for weekly generator service."></textarea>
+                </label>
+                <div class="form-actions">
+                  <button class="primary-button" id="inventory-submit" type="submit">Add item</button>
+                  <button class="text-button" id="inventory-cancel" type="button" hidden>Cancel edit</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="panel section-block view-panel expenses-section" data-view-panel="expenses">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Accounts Desk</p>
+                  <h2>Expenses</h2>
+                </div>
+                <div class="section-heading-actions">
+                  <label class="sort-shell">
+                    <span>Sort by</span>
+                    <select id="expense-sort">
+                      <option value="date-desc">Newest date</option>
+                      <option value="date-asc">Oldest date</option>
+                      <option value="amount-desc">Highest amount</option>
+                      <option value="amount-asc">Lowest amount</option>
+                      <option value="vendor">Vendor</option>
+                    </select>
+                  </label>
+                  <button class="primary-button" id="jump-to-expense-form" type="button">New expense</button>
+                </div>
+              </div>
+              <div class="expenses-analytics" id="expenses-analytics"></div>
+              <div class="expenses-list" id="expenses-list"></div>
+              <form id="expense-form" class="stacked-form compact-form" novalidate>
+                <label>
+                  Expense title
+                  <input type="text" name="title" placeholder="Dockside fuel top-up" required />
+                </label>
+                <div class="form-row">
+                  <label>
+                    Amount
+                    <input type="number" name="amount" min="0" step="0.01" value="0" required />
+                  </label>
+                  <label>
+                    Currency
+                    <input type="text" name="currency" value="USD" maxlength="6" />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>
+                    Date
+                    <input type="date" name="expenseDate" required />
+                  </label>
+                  <label>
+                    Status
+                    <select name="status">
+                      <option>Planned</option>
+                      <option>Submitted</option>
+                      <option>Approved</option>
+                      <option>Paid</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  Vendor
+                  <select name="vendor">
+                    <option value="">Select saved vendor</option>
+                  </select>
+                  <span class="field-helper">Pulled from the Vendors tab. Category fills in automatically.</span>
+                </label>
+                <label>
+                  Category
+                  <select name="category">
+                    <option value="">Select saved category</option>
+                  </select>
+                  <span class="field-helper">Uses the same vendor categories already saved in your directory.</span>
+                </label>
+                <label>
+                  Notes
+                  <textarea name="notes" rows="3" placeholder="Receipt uploaded to accounting folder."></textarea>
+                </label>
+                <div class="form-actions">
+                  <button class="primary-button" id="expense-submit" type="submit">Add expense</button>
+                  <button class="text-button" id="expense-cancel" type="button" hidden>Cancel edit</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="panel section-block view-panel" data-view-panel="voyage">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Voyage Pulse</p>
+                  <h2>Route and alerts</h2>
+                </div>
+                <label class="sort-shell">
+                  <span>Sort by</span>
+                  <select id="voyage-sort">
+                    <option value="departure-asc">Departure date</option>
+                    <option value="departure-desc">Latest departure</option>
+                    <option value="route-asc">Route name</option>
+                    <option value="status">Status</option>
+                  </select>
+                </label>
+              </div>
+              <div class="voyage-list" id="voyage-list"></div>
+              <div class="alert-feed" id="alert-feed"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+  <script src="script.js?v=20260418g"></script>
+  </body>
+</html>
