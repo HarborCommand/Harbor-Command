@@ -20,6 +20,7 @@ export default async function handler(req, res) {
 
       try {
         const { Client } = await import("pg");
+
         const client = new Client({
           connectionString: process.env.DATABASE_URL,
           ssl: { rejectUnauthorized: false },
